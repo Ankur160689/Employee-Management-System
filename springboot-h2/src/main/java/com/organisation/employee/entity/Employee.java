@@ -112,7 +112,7 @@ public class Employee {
 		this.managerId = managerId;
 	}
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(foreignKey = @ForeignKey(name = "department_id"), name = "department_id")
+        @JoinColumn(foreignKey = @ForeignKey(name = "department_id"), name = "department_id")
 	public Department getDepartment() {
 		return department;
 	}
