@@ -13,7 +13,7 @@ CREATE TABLE "employee"
    , "hire_date" DATE
    , "salary" NUMBER(8,2)
    , "manager_id" NUMBER(6)
-   , "department_id" NUMBER(4)   
+   , "department_id" NUMBER(4)   FOREIGN KEY REFERENCES department(department_id)
    ) ;
 INSERT INTO "employee" VALUES(1, 'Ankur Kumar', 'Das', 'ankurkrdas16@gmail.com', '+919874743078', '2021-09-25', '1000.0', 6, 12);
 INSERT INTO "employee" VALUES(2, 'John', 'Doe', 'john.doe@gmail.com', '+14064309812', '2021-09-16', '2000.0', 9, 19);
