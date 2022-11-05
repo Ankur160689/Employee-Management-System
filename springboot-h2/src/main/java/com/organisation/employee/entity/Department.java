@@ -25,8 +25,8 @@ public class Department {
 	@Column(name = "manager_id")
 	private int managerId;
 	@OneToMany(fetch = FetchType.LAZY,mappedBy="department")
-    @JsonIgnore
-    private List<Employee> employees;
+        @JsonIgnore
+        private List<Employee> employees;
 	public int getDepartmentId() {
 		return departmentId;
 	}
