@@ -1,41 +1,67 @@
 <h3>Create Employee</h3>
 <div [hidden]="submitted" style="width: 400px;">
-  <form (ngSubmit)="onSubmit()">
+  <form name="employeeForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="firstName">First Name</label>
-      <input type="text" class="form-control" id="firstName" required [(ngModel)]="employee.firstName" minlength="2" name="firstName">
+      <input type="text" class="form-control" id="firstName" required [(ngModel)]="employee.firstName" minlength="3" name="firstName" #firstName="ngModel">
     </div>
-
-    <div class="form-group">
+	<div class="error" *ngIf="firstName.errors?.minlength">
+     	First Name must be at least 3 characters long.
+	</div> 
+	<div class="error" *ngIf="firstName.errors?.required">
+     	First Name can not be empty.
+	</div> 
+    <div class="error" class="form-group">
       <label for="lastName">Last Name</label>
-      <input type="text" class="form-control" id="lastName" required [(ngModel)]="employee.lastName"  minlength="2" name="lastName">
+      <input type="text" class="form-control" id="lastName" required [(ngModel)]="employee.lastName"  minlength="3" name="lastName" #lastName="ngModel">
     </div>
-
+	<div class="error" *ngIf="lastName.errors?.minlength">
+     	Last Name must be at least 3 characters long.
+	</div> 
+	<div class="error" *ngIf="lastName.errors?.required">
+     	Last Name can not be empty.
+	</div>
     <div class="form-group">
       <label for="emailId">Email Id</label>
-      <input type="text" class="form-control" id="emailId" required [(ngModel)]="employee.emailId" name="emailId">
+      <input type="email" class="form-control" id="emailId" required [(ngModel)]="employee.emailId" name="emailId" #email="ngModel" ngModel email="true">
     </div>
-    
+    <div class="error" *ngIf="email.errors?.required">
+     	Email Address can not be empty.
+	</div>
+	<div class="error" *ngIf="email.errors?.email">
+     	Please enter valid email address.
+	</div>
     <div class="form-group">
       <label for="phoneNumber">Phone Number</label>
-      <input type="number" class="form-control" id="phoneNumber" required [(ngModel)]="employee.phoneNumber" pattern="^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$"  name="phoneNumber">
+      <input type="number" class="form-control" id="phoneNumber" required [(ngModel)]="employee.phoneNumber" pattern="^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$"  name="phoneNumber" #phone="ngModel">
     </div>
-    
+    <div class="error" *ngIf="phone.errors?.required">
+     	Phone Number can not be empty.
+	</div>
+	<div class="error" *ngIf="phone.errors?.pattern">
+     	Please enter valid phone number.
+	</div>
     <div class="form-group">
       <label for="hireDate">Hire Date</label>
-      <input type="date" class="form-control" id="hireDate" required [(ngModel)]="employee.hireDate" name="hireDate">
+      <input type="date" class="form-control" id="hireDate" required [(ngModel)]="employee.hireDate" name="hireDate" #hireDate="ngModel">
     </div>
-    
+    <div class="error" *ngIf="hireDate.errors?.required">
+     	Hire Date can not be empty.
+	</div>
     <div class="form-group">
       <label for="salary">Salary</label>
-      <input type="number" class="form-control" id="salary" required [(ngModel)]="employee.salary" min="1" name="salary">
+      <input type="number" class="form-control" id="salary" required [(ngModel)]="employee.salary" min="1" name="salary" #salary="ngModel" pattern="^[1-9]\d*(?:\.\d+)?$">
     </div>
-    
+    <div class="error" *ngIf="salary.errors?.required">
+     	Salary can not be empty.
+	</div>
+	<div class="error" *ngIf="salary.errors?.pattern">
+     	Salary should be greater than 0.
+	</div>
      <div class="form-group">
       <label for="managerId">Manager Id</label>
       <input type="number" class="form-control" id="managerId" required [(ngModel)]="employee.managerId" name="managerId">
     </div>
-    
     <div class="form-group">
       <label for="departmentId">Department Name</label>
       <input type="number" class="form-control" id="departmentId" required [(ngModel)]="employee.department.departmentId" name="departmentId">
@@ -49,3 +75,9 @@
   <h4>You submitted successfully!</h4>
   <!-- <button class="btn btn-success" (click)="newEmployee()">Add</button> -->
 </div>
+<style>
+.error {
+color: red;
+}	
+</style>
+
